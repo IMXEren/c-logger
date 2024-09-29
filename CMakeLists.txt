@@ -33,6 +33,7 @@ target_include_directories(
 
 ### Install
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 file(GLOB header_files src/*.h)
 install(FILES ${header_files} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
