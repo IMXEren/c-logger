@@ -14,19 +14,16 @@ set(source_files
     src/logger.c
     src/loggerconf.c
 )
-# shared and static libraries
-add_library(${PROJECT_NAME} SHARED ${source_files})
-add_library(${PROJECT_NAME}_static STATIC ${source_files})
-set_target_properties(${PROJECT_NAME}_static PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+# shared or static library
+if(BUILD_SHARED_LIBS)
+    add_library(${PROJECT_NAME} SHARED ${source_files})
+else()
+    add_library(${PROJECT_NAME} STATIC ${source_files})
+endif()
 
 # Export the include directory
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
-target_include_directories(
-    ${PROJECT_NAME}_static PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
